@@ -2,18 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Compilation') {
+        stage('Build') {
             steps {
                 script {
-                    sh 'sbt clean compile'
+                    dir('simple-scala-project') {
+                        sh 'sbt clean compile'
+                    }
                 }
             }
         }
 
-        stage('Tests') {
+        stage('Test') {
             steps {
                 script {
-                    sh 'sbt test'
+                    dir('simple-scala-project') {
+                        sh 'sbt test'
+                    }
                 }
             }
         }
@@ -21,10 +25,10 @@ pipeline {
 
     post {
         success {
-            echo 'Compilation et tests effectués.'
+            echo 'Build and Test stages passed.'
         }
         failure {
-            echo 'Erreur lors de la compilation ou des tests.'
+            echo 'Build or Test stages failed.'
         }
     }
 }
