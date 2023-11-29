@@ -13,20 +13,33 @@ class ProgramSpec extends AnyFlatSpec with Matchers {
       1 -> 1,
       2 -> 1,
       3 -> 2,
-      7 -> 14
+      7 -> 13
     ).foreach{case (i, expected) =>
       Program.fibonacci1(i) shouldBe expected
     }
   }
 
-  //TODO: Implement tests
   "lpadZeros" should "return the expected results" in {
-    ???
+    Map(
+      (7, 3) -> "007",
+      (18, 2) -> "18",
+      (121, 2) -> "21",
+      (-1, 5) -> "-00001"
+    ).foreach { case ((input, length), expected) =>
+      Program.lpadZeros(input, length) shouldBe expected
+    }
   }
 
-  //TODO: Implement tests
   "isPrimeNumber" should "return the expected results" in {
-    ???
+    Map(
+      2 -> true,
+      3 -> true,
+      4 -> false,
+      13 -> true,
+      15 -> false
+    ).foreach { case (number, expected) =>
+      Program.isPrimeNumber(number) shouldBe expected
+    }
   }
 
 }
